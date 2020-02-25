@@ -147,7 +147,7 @@ public class Main implements Runnable, KeyListener {
                 g.setColor(Color.red);
                 g.fillOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
             }
-
+            g.setColor(Color.white);
             g.drawString(spaceship.angle + "°", 20, 20);
 
         } else {
