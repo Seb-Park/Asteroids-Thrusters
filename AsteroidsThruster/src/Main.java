@@ -5,6 +5,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 
 public class Main implements Runnable, KeyListener {
@@ -16,14 +17,17 @@ public class Main implements Runnable, KeyListener {
     public JPanel panel;
 
     public Ship spaceship;
+    public Bullet bullet;
+
+    public int shootCounter;
 
     public BufferStrategy bufferStrategy;
 
+
     public Main() {
         setUpGraphics();
-
         spaceship = new Ship(500, 350);
-
+        shootCounter = 20;
     }
 
     public static void main(String[] args) {
@@ -36,35 +40,50 @@ public class Main implements Runnable, KeyListener {
             moveThings();
             render();
             pause(20);
+            if (shootCounter <= 20) {
+                shootCounter++;
+            }
         }
     }
 
 
     public void moveThings() {
-        if(spaceship.isThrusting){
+        if (spaceship.isThrusting) {
             spaceship.thrust();
-        }
-        else{
+        } else {
             spaceship.drift();
         }
-        if(spaceship.isRight){
+        if (spaceship.isRight) {
             spaceship.reorient(5);
         }
-        if(spaceship.isLeft){
+        if (spaceship.isLeft) {
             spaceship.reorient(-5);
         }
+        if (spaceship.isHyperspace) {
+            spaceship.hyperspace();
+        }
 
-        if(spaceship.xpos>frame.getWidth()+11){
+        if (spaceship.isShooting && shootCounter >= 20) {
+            shootCounter = 0;
+            spaceship.shoot();
+        }
+
+        for (int x = 0; x < spaceship.bullets.size(); x++) {
+            spaceship.bullets.get(x).move();
+        }
+
+
+        if (spaceship.xpos > frame.getWidth() + 11) {
             spaceship.xpos = -10;
         }
-        if(spaceship.xpos<-11){
-            spaceship.xpos = frame.getWidth()+10;
+        if (spaceship.xpos < -11) {
+            spaceship.xpos = frame.getWidth() + 10;
         }
-        if(spaceship.ypos>frame.getHeight()+11){
+        if (spaceship.ypos > frame.getHeight() + 11) {
             spaceship.ypos = -10;
         }
-        if(spaceship.ypos<-11){
-            spaceship.ypos = frame.getHeight()+10;
+        if (spaceship.ypos < -11) {
+            spaceship.ypos = frame.getHeight() + 10;
         }
     }
 
@@ -115,13 +134,23 @@ public class Main implements Runnable, KeyListener {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 
-        g.setColor(Color.orange);
-        g.drawOval((int)(spaceship.xpos - spaceship.xthrust), (int)(spaceship.ypos - spaceship.ythrust), 15, 15);
+        if (spaceship.isAlive) {
+            g.setColor(Color.orange);
+            g.drawOval((int) (spaceship.xpos - spaceship.xthrust), (int) (spaceship.ypos - spaceship.ythrust), 15, 15);
 
-        g.setColor(Color.white);
-        g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
+            g.setColor(Color.white);
+            g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
 
-        g.drawString(spaceship.angle+"°",20,20);
+            for (int x = 0; x < spaceship.bullets.size(); x++) {
+                g.setColor(Color.white);
+                g.drawOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
+            }
+
+            g.drawString(spaceship.angle + "°", 20, 20);
+        } else {
+            g.setColor(Color.white);
+            g.drawString("GAME OVER", 450, 350);
+        }
 
         g.dispose();
 
@@ -145,19 +174,31 @@ public class Main implements Runnable, KeyListener {
         if (key == 38) {
             spaceship.isThrusting = true;
         }
+        if (key == 72) {
+            spaceship.isHyperspace = true;
+        }
+        if (key == 32) {
+            spaceship.isShooting = true;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == 39){
+        if (key == 39) {
             spaceship.isRight = false;
         }
-        if(key == 37){
+        if (key == 37) {
             spaceship.isLeft = false;
         }
-        if(key == 38){
+        if (key == 38) {
             spaceship.isThrusting = false;
+        }
+        if (key == 72) {
+            spaceship.isHyperspace = false;
+        }
+        if (key == 32) {
+            spaceship.isShooting = false;
         }
     }
 }

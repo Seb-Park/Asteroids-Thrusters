@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Ship {
 
@@ -14,7 +15,8 @@ public class Ship {
     public double drag = .1;
     public double ythrust;
     public double xthrust;
-    public boolean isThrusting, isRight, isLeft;
+    public boolean isThrusting, isRight, isLeft, isHyperspace, isShooting, isAlive;
+    public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 //    public Rectangle rec;
     public double angle;
@@ -27,6 +29,8 @@ public class Ship {
         width = 60;
         height = 60;
         isThrusting = false;
+        isAlive = true;
+        isShooting = false;
         angle = 90;
     }
 
@@ -62,6 +66,22 @@ public class Ship {
         xpos += xthrust;
 
     }
+
+    public void hyperspace(){
+        xpos = (int) (Math.random() * 1000);
+        ypos = (int) (Math.random() * 700);
+        isHyperspace = false;
+        int random = (int) (Math.random() * 10);
+        if(random == 5) {
+            isAlive = false;
+        }
+    }
+
+    public void shoot(){
+        bullets.add(new Bullet(xpos, ypos, angle));
+
+    }
+
 }
 
 
