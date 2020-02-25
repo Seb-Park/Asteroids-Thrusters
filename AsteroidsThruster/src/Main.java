@@ -51,7 +51,7 @@ public class Main implements Runnable, KeyListener {
 
     public void moveThings() {
         if (spaceship.isThrusting) {
-            spaceship.thrust();
+            spaceship.thrustNew();
         } else {
             spaceship.drift();
         }
@@ -138,7 +138,7 @@ public class Main implements Runnable, KeyListener {
 
         if (spaceship.isAlive) {
             g.setColor(Color.orange);
-            g.drawOval((int) (spaceship.xpos - spaceship.xthrust), (int) (spaceship.ypos - spaceship.ythrust), 15, 15);
+            g.drawOval((int) (spaceship.xpos - Math.cos(Math.toRadians(spaceship.angle)) * 5), (int) (spaceship.ypos - Math.sin(Math.toRadians(spaceship.angle)) * 5), 15, 15);
 
             g.setColor(Color.white);
             g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);

@@ -10,12 +10,44 @@ public class Vector {
     }
 
     public Vector(double pxcom, double pycom, boolean placeholder){
-        double mag = Math.sqrt(Math.pow(pxcom,2)+Math.pow(pycom,2));
-        angle = Math.asin(pycom/mag);
+        xcom = pxcom;
+        ycom = pycom;
+        magnitude = Math.sqrt(Math.pow(pxcom,2)+Math.pow(pycom,2));
+        angle = Math.asin(pycom/magnitude);
     }
 
     public void reorient(double delta){
+        angle += delta;
+        if(angle<0){
+            angle += 360;
+        }
+        if(angle>360)
+        {
+            angle = 360-angle;
+        }
+        ycom = Math.sin(Math.toRadians(angle)) * magnitude;
+        xcom = Math.cos(Math.toRadians(angle)) * magnitude;
+    }
 
+    public void recalculate(double pAngle, double pMagnitude){
+        angle = pAngle;
+        magnitude = pMagnitude;
+        ycom = Math.sin(Math.toRadians(angle)) * magnitude;
+        xcom = Math.cos(Math.toRadians(angle)) * magnitude;
+    }
+
+    public void recalculate(double pxcom, double pycom, boolean placeholder){
+        xcom = pxcom;
+        ycom = pycom;
+        magnitude = Math.sqrt(Math.pow(pxcom,2)+Math.pow(pycom,2));
+        angle = Math.asin(pycom/magnitude);
+    }
+
+    public void addVector(double pxcom, double pycom){
+        xcom+=pxcom;
+        ycom+=pycom;
+        magnitude = Math.sqrt(Math.pow(pxcom,2)+Math.pow(pycom,2));
+        angle = Math.asin(pycom/magnitude);
     }
 
     public static double[] angleToVector (double angle, double magnitude){

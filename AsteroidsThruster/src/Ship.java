@@ -1,24 +1,23 @@
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Ship {
 
     public int xpos;
     public int ypos;
-    public int dx;
-    public int dy;
+    public double dx;
+    public double dy;
     public int width;
     public int height;
     public double velocity = 0;
     public double terminalvel = 5;
     public double acceleration = .2;
-    public double drag = .1;
+    public double drag = .0;
     public double ythrust;
     public double xthrust;
     public boolean isThrusting, isRight, isLeft, isHyperspace, isShooting, isAlive;
     public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-//    public Rectangle rec;
+    //    public Rectangle rec;
     public double angle;
 
     public Ship(int pXpos, int pYpos) {
@@ -34,14 +33,13 @@ public class Ship {
         angle = 90;
     }
 
-    public void reorient(double pAngle){
+    public void reorient(double pAngle) {
         angle += pAngle;
-        if(angle<0){
+        if (angle < 0) {
             angle += 360;
         }
-        if(angle>360)
-        {
-            angle = 360-angle;
+        if (angle > 360) {
+            angle = 360 - angle;
         }
 //        System.out.println(angle);
     }
@@ -56,29 +54,49 @@ public class Ship {
         xpos += xthrust;
     }
 
-    public void drift(){
-        if(velocity>0){
-            velocity-=drag;
+    public void thrustNew() {
+        ythrust = Math.sin(Math.toRadians(angle)) * acceleration;
+        xthrust = Math.cos(Math.toRadians(angle)) * acceleration;
+
+//        velocity = Math.sqrt(Math.pow(xpos, 2) + Math.pow(ypos, 2));
+
+//        if (velocity < terminalvel) {
+        dy += ythrust; // add the new vector and previous one together
+        dx += xthrust;
+//        }
+        ypos += dy;
+        xpos += dx;
+    }
+
+    public void drift() {
+        if (dy >= 0) dy *= 0.01;//create drag proportional to the velocity
+        if (dx >= 0) dx *= 0.01;
+        ypos += dy;
+        xpos += dx;
+    }
+
+    public void driftOld() {
+        if (velocity > 0) {
+            velocity -= drag;
         }
         ythrust = Math.sin(Math.toRadians(angle)) * velocity;
         xthrust = Math.cos(Math.toRadians(angle)) * velocity;
         ypos += ythrust;
         xpos += xthrust;
-
     }
 
-    public void hyperspace(){
+    public void hyperspace() {
         xpos = (int) (Math.random() * 1000);
         ypos = (int) (Math.random() * 700);
         isHyperspace = false;
         int random = (int) (Math.random() * 10);
-        if(random == 5) {
+        if (random == 5) {
             isAlive = false;
 
         }
     }
 
-    public void shoot(){
+    public void shoot() {
         bullets.add(new Bullet(xpos, ypos, angle));
 
     }
