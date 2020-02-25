@@ -74,6 +74,7 @@ public class Ship {
         int random = (int) (Math.random() * 10);
         if(random == 5) {
             isAlive = false;
+
         }
     }
 
