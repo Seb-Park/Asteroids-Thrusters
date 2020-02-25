@@ -153,7 +153,10 @@ public class Main implements Runnable, KeyListener {
         } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
-            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 25, 25, null);
+            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 75, 75, null);
+            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 75, 75, null);
+            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 75, 75, null);
+            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 75, 75, null);
         }
 
         g.dispose();
