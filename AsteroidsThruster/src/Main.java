@@ -17,7 +17,6 @@ public class Main implements Runnable, KeyListener {
     public JPanel panel;
 
     public Ship spaceship;
-    public Bullet bullet;
 
     public int shootCounter;
 
@@ -27,7 +26,7 @@ public class Main implements Runnable, KeyListener {
     public Main() {
         setUpGraphics();
         spaceship = new Ship(500, 350);
-        shootCounter = 20;
+        shootCounter = 10;
     }
 
     public static void main(String[] args) {
@@ -40,7 +39,7 @@ public class Main implements Runnable, KeyListener {
             moveThings();
             render();
             pause(20);
-            if (shootCounter <= 20) {
+            if (shootCounter <= 10) {
                 shootCounter++;
             }
         }
@@ -63,7 +62,7 @@ public class Main implements Runnable, KeyListener {
             spaceship.hyperspace();
         }
 
-        if (spaceship.isShooting && shootCounter >= 20) {
+        if (spaceship.isShooting && shootCounter >= 10) {
             shootCounter = 0;
             spaceship.shoot();
         }
@@ -143,10 +142,11 @@ public class Main implements Runnable, KeyListener {
 
             for (int x = 0; x < spaceship.bullets.size(); x++) {
                 g.setColor(Color.white);
-                g.drawOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
+                g.fillOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
             }
 
             g.drawString(spaceship.angle + "°", 20, 20);
+
         } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 350);

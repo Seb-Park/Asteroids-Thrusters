@@ -5,7 +5,7 @@ public class Bullet {
     public double ythrust;
     public double xthrust;
     public double angle;
-    public double velocity = 5;
+    public double velocity = 10;
 
     public Bullet(int pXpos, int pYpos, double pAngle) {
         xpos = pXpos;
