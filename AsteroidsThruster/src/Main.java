@@ -18,6 +18,8 @@ public class Main implements Runnable, KeyListener {
 
     public Ship spaceship;
 
+    public Image explosion;
+
     public int shootCounter;
 
     public BufferStrategy bufferStrategy;
@@ -27,6 +29,7 @@ public class Main implements Runnable, KeyListener {
         setUpGraphics();
         spaceship = new Ship(500, 350);
         shootCounter = 10;
+        explosion = Toolkit.getDefaultToolkit().getImage("explosion.gif");
     }
 
     public static void main(String[] args) {
@@ -149,7 +152,8 @@ public class Main implements Runnable, KeyListener {
 
         } else {
             g.setColor(Color.white);
-            g.drawString("GAME OVER", 450, 350);
+            g.drawString("GAME OVER", 450, 600);
+            g.drawImage(explosion, spaceship.xpos, spaceship.ypos, 25, 25, null);
         }
 
         g.dispose();
