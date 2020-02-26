@@ -121,7 +121,7 @@ public class Ship {
     }
 
     public void shoot() {
-        bullets.add(new Bullet((int) xpos, (int) ypos, angle,dx,dy));
+        bullets.add(new Bullet((int) xpos, (int) ypos, angle, dx, dy));
 
     }
 
