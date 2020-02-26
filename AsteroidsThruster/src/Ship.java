@@ -65,7 +65,7 @@ public class Ship {
 
         velocity = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
-        System.out.println(velocity);
+//        System.out.println(velocity);
 
         dy += ythrust; // add the new vector and previous one together
         dx += xthrust;
