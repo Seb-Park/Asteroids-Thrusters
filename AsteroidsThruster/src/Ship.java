@@ -44,7 +44,7 @@ public class Ship {
             angle += 360;
         }
         if (angle > 360) {
-            angle = 360 - angle;
+            angle = Math.abs(360 - angle);
         }
 //        System.out.println(angle);
     }
