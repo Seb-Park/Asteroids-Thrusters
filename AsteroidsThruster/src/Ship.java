@@ -63,12 +63,13 @@ public class Ship {
         ythrust = Math.sin(Math.toRadians(angle)) * acceleration;
         xthrust = Math.cos(Math.toRadians(angle)) * acceleration;
 
-        velocity = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
 //        System.out.println(velocity);
 
         dy += ythrust; // add the new vector and previous one together
         dx += xthrust;
+
+        velocity = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
         if (velocity > terminalvel) {
             dy -= ythrust;
