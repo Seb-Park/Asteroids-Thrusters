@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Ship {
 
@@ -19,6 +20,8 @@ public class Ship {
 
     public int[] shipXPoints, shipYPoints;
 
+    public int[] engineXPoints, engineYPoints;
+
     //    public Rectangle rec;
     public double angle;
 
@@ -35,7 +38,10 @@ public class Ship {
         angle = 90;
         shipXPoints = new int[4];
         shipYPoints = new int[4];
+        engineXPoints = new int[4];
+        engineYPoints = new int[4];
         updateAngles();
+        updateFire();
     }
 
     public void reorient(double pAngle) {
@@ -77,6 +83,7 @@ public class Ship {
         }
         ypos += dy;
         xpos += dx;
+        updateFire();
     }
 
     public void drift() {
@@ -107,6 +114,18 @@ public class Ship {
         shipYPoints[3] = (int) ((Math.sin(Math.toRadians(angle + 130)) * 20) + ypos);
 //        System.out.println(Arrays.toString(shipXPoints));
 //        System.out.println(Arrays.toString(shipYPoints));
+    }
+
+    public void updateFire(){
+        engineXPoints[0] = (int) ((Math.cos(Math.toRadians(angle + 180)) * 5) + xpos);
+        engineYPoints[0] = (int) ((Math.sin(Math.toRadians(angle + 180)) * 5) + ypos);
+        engineXPoints[1] = (int) ((Math.cos(Math.toRadians(angle + 140)) * 11) + xpos);
+        engineYPoints[1] = (int) ((Math.sin(Math.toRadians(angle + 140)) * 11) + ypos);
+        engineXPoints[2] = (int) ((Math.cos(Math.toRadians(angle + 180)) * 20) + xpos);
+        engineYPoints[2] = (int) ((Math.sin(Math.toRadians(angle + 180)) * 20) + ypos);
+        engineXPoints[3] = (int) ((Math.cos(Math.toRadians(angle + 220)) * 11) + xpos);
+        engineYPoints[3] = (int) ((Math.sin(Math.toRadians(angle + 220)) * 11) + ypos);
+
     }
 
     public void hyperspace() {

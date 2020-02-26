@@ -146,6 +146,9 @@ public class Main implements Runnable, KeyListener {
 //            g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
 
             g.drawPolygon(spaceship.shipXPoints, spaceship.shipYPoints, 4);
+            if(spaceship.isThrusting){
+                g.drawPolygon(spaceship.engineXPoints, spaceship.engineYPoints,4);
+            }
 
             for (int x = 0; x < spaceship.bullets.size(); x++) {
 //                g.setColor(Color.red);
