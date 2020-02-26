@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Ship {
 
@@ -17,6 +18,8 @@ public class Ship {
     public boolean isThrusting, isRight, isLeft, isHyperspace, isShooting, isAlive;
     public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
+    public int[] shipXPoints, shipYPoints;
+
     //    public Rectangle rec;
     public double angle;
 
@@ -31,6 +34,9 @@ public class Ship {
         isAlive = true;
         isShooting = false;
         angle = 90;
+        shipXPoints = new int[3];
+        shipYPoints = new int[3];
+        updateAngles();
     }
 
     public void reorient(double pAngle) {
@@ -83,6 +89,17 @@ public class Ship {
         xthrust = Math.cos(Math.toRadians(angle)) * velocity;
         ypos += ythrust;
         xpos += xthrust;
+    }
+
+    public void updateAngles() {
+        shipXPoints[0] = (int) (Math.cos(Math.toRadians(angle)) * 25) + xpos;
+        shipYPoints[0] = (int) (Math.sin(Math.toRadians(angle)) * 25) + ypos;
+        shipXPoints[1] = (int) (Math.cos(Math.toRadians(angle + 230)) * 15) + xpos;
+        shipYPoints[1] = (int) (Math.sin(Math.toRadians(angle + 230)) * 15) + ypos;
+        shipXPoints[2] = (int) (Math.cos(Math.toRadians(angle + 130)) * 15) + xpos;
+        shipYPoints[2] = (int) (Math.sin(Math.toRadians(angle + 130)) * 15) + ypos;
+//        System.out.println(Arrays.toString(shipXPoints));
+//        System.out.println(Arrays.toString(shipYPoints));
     }
 
     public void hyperspace() {

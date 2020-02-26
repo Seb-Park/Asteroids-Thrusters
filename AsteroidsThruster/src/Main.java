@@ -74,6 +74,7 @@ public class Main implements Runnable, KeyListener {
             spaceship.bullets.get(x).move();
         }
 
+        spaceship.updateAngles();
 
         if (spaceship.xpos > frame.getWidth() + 11) {
             spaceship.xpos = -10;
@@ -138,10 +139,12 @@ public class Main implements Runnable, KeyListener {
 
         if (spaceship.isAlive) {
             g.setColor(Color.orange);
-            g.drawOval((int) (spaceship.xpos - Math.cos(Math.toRadians(spaceship.angle)) * 5), (int) (spaceship.ypos - Math.sin(Math.toRadians(spaceship.angle)) * 5), 15, 15);
+//            g.drawOval((int) (spaceship.xpos - Math.cos(Math.toRadians(spaceship.angle)) * 5), (int) (spaceship.ypos - Math.sin(Math.toRadians(spaceship.angle)) * 5), 15, 15);
 
             g.setColor(Color.white);
-            g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
+//            g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
+
+            g.drawPolygon(spaceship.shipXPoints,spaceship.shipYPoints, 3);
 
             for (int x = 0; x < spaceship.bullets.size(); x++) {
                 g.setColor(Color.red);
@@ -149,7 +152,6 @@ public class Main implements Runnable, KeyListener {
             }
             g.setColor(Color.white);
             g.drawString(spaceship.angle + "°", 20, 20);
-
         } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
