@@ -96,7 +96,7 @@ public class Ship {
     }
 
     public void updateAngles() {
-        shipXPoints[0] = (int) ((Math.cos(Math.toRadians(angle)) * 25) + xpos);
+        shipXPoints[0] = (int) ((Math.cos(Math.toRadians(angle)) * 25) + xpos); //vectors of different magnitude in ship because of shape
         shipYPoints[0] = (int) ((Math.sin(Math.toRadians(angle)) * 25) + ypos);
         shipXPoints[1] = (int) ((Math.cos(Math.toRadians(angle + 230)) * 15) + xpos);
         shipYPoints[1] = (int) ((Math.sin(Math.toRadians(angle + 230)) * 15) + ypos);
