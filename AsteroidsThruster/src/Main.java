@@ -55,6 +55,7 @@ public class Main implements Runnable, KeyListener {
         } else {
             spaceship.drift();
         }
+
         if (spaceship.isRight) {
             spaceship.reorient(5);
         }
@@ -144,7 +145,7 @@ public class Main implements Runnable, KeyListener {
             g.setColor(Color.white);
 //            g.drawOval(spaceship.xpos, spaceship.ypos, 15, 15);
 
-            g.drawPolygon(spaceship.shipXPoints,spaceship.shipYPoints, 4);
+            g.drawPolygon(spaceship.shipXPoints, spaceship.shipYPoints, 4);
 
             for (int x = 0; x < spaceship.bullets.size(); x++) {
 //                g.setColor(Color.red);
@@ -155,10 +156,7 @@ public class Main implements Runnable, KeyListener {
         } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
-            g.drawImage(explosion, (int)spaceship.xpos, (int)spaceship.ypos, 75, 75, null);
-            g.drawImage(explosion, (int)spaceship.xpos, (int)spaceship.ypos, 75, 75, null);
-            g.drawImage(explosion, (int)spaceship.xpos, (int)spaceship.ypos, 75, 75, null);
-            g.drawImage(explosion, (int)spaceship.xpos, (int)spaceship.ypos, 75, 75, null);
+            g.drawImage(explosion, (int) spaceship.xpos, (int) spaceship.ypos, 75, 75, null);
         }
 
         g.dispose();
@@ -180,7 +178,7 @@ public class Main implements Runnable, KeyListener {
         if (key == 37) {
             spaceship.isLeft = true;
         }
-        if (key == 38) {
+        if (key == 38 && spaceship.isAlive) {
             spaceship.isThrusting = true;
         }
         if (key == 72) {

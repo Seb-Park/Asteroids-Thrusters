@@ -9,7 +9,7 @@ public class Ship {
     public int width;
     public int height;
     public double velocity = 0;
-    public double terminalvel = 20;
+    public double terminalvel = 10;
     public double acceleration = .2;
     public double drag = .0;
     public double ythrust;
@@ -80,8 +80,8 @@ public class Ship {
     }
 
     public void drift() {
-        if (Math.abs(dy) >= 0) dy *= 0.99;//create drag proportional to the velocity
-        if (Math.abs(dx) >= 0) dx *= 0.99;
+        if (Math.abs(dy) >= 0) dy *= 0.94;//create drag proportional to the velocity
+        if (Math.abs(dx) >= 0) dx *= 0.94;
         ypos += dy;
         xpos += dx;
     }
@@ -97,7 +97,7 @@ public class Ship {
     }
 
     public void updateAngles() {
-        shipXPoints[0] = (int) ((Math.cos(Math.toRadians(angle)) * 25) + xpos);
+        shipXPoints[0] = (int) ((Math.cos(Math.toRadians(angle)) * 25) + xpos); //vectors of different magnitude in ship because of shape
         shipYPoints[0] = (int) ((Math.sin(Math.toRadians(angle)) * 25) + ypos);
         shipXPoints[1] = (int) ((Math.cos(Math.toRadians(angle + 230)) * 15) + xpos);
         shipYPoints[1] = (int) ((Math.sin(Math.toRadians(angle + 230)) * 15) + ypos);
