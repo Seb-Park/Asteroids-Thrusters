@@ -153,6 +153,7 @@ public class Main implements Runnable, KeyListener {
             }
             g.setColor(Color.white);
             g.drawString(spaceship.angle + "°", 20, 20);
+//            g.drawString((double)Math.round(spaceship.velocity*10)/10 + "m/s", 20, 50);
         } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
