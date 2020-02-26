@@ -147,7 +147,7 @@ public class Main implements Runnable, KeyListener {
             g.drawPolygon(spaceship.shipXPoints,spaceship.shipYPoints, 4);
 
             for (int x = 0; x < spaceship.bullets.size(); x++) {
-                g.setColor(Color.red);
+//                g.setColor(Color.red);
                 g.fillOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
             }
             g.setColor(Color.white);
