@@ -33,8 +33,8 @@ public class Ship {
         isAlive = true;
         isShooting = false;
         angle = 90;
-        shipXPoints = new int[3];
-        shipYPoints = new int[3];
+        shipXPoints = new int[4];
+        shipYPoints = new int[4];
         updateAngles();
     }
 
@@ -100,8 +100,10 @@ public class Ship {
         shipYPoints[0] = (int) ((Math.sin(Math.toRadians(angle)) * 25) + ypos);
         shipXPoints[1] = (int) ((Math.cos(Math.toRadians(angle + 230)) * 15) + xpos);
         shipYPoints[1] = (int) ((Math.sin(Math.toRadians(angle + 230)) * 15) + ypos);
-        shipXPoints[2] = (int) ((Math.cos(Math.toRadians(angle + 130)) * 15) + xpos);
-        shipYPoints[2] = (int) ((Math.sin(Math.toRadians(angle + 130)) * 15) + ypos);
+        shipXPoints[2] = (int) ((Math.cos(Math.toRadians(angle + 180)) * 5) + xpos);
+        shipYPoints[2] = (int) ((Math.sin(Math.toRadians(angle + 180)) * 5) + ypos);
+        shipXPoints[3] = (int) ((Math.cos(Math.toRadians(angle + 130)) * 15) + xpos);
+        shipYPoints[3] = (int) ((Math.sin(Math.toRadians(angle + 130)) * 15) + ypos);
 //        System.out.println(Arrays.toString(shipXPoints));
 //        System.out.println(Arrays.toString(shipYPoints));
     }
