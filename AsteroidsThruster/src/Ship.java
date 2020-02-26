@@ -9,7 +9,7 @@ public class Ship {
     public int width;
     public int height;
     public double velocity = 0;
-    public double terminalvel = 20;
+    public double terminalvel = 10;
     public double acceleration = .2;
     public double drag = .0;
     public double ythrust;
@@ -79,8 +79,8 @@ public class Ship {
     }
 
     public void drift() {
-        if (Math.abs(dy) >= 0) dy *= 0.99;//create drag proportional to the velocity
-        if (Math.abs(dx) >= 0) dx *= 0.99;
+        if (Math.abs(dy) >= 0) dy *= 0.94;//create drag proportional to the velocity
+        if (Math.abs(dx) >= 0) dx *= 0.94;
         ypos += dy;
         xpos += dx;
     }
