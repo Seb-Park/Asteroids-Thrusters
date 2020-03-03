@@ -73,9 +73,9 @@ public class Asteroid {
         for (int i = 0; i < vectors.size(); i++) {
             System.out.print("["+vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
         }
-        System.out.print("]");
+        System.out.println("]");
 
-//        System.out.println(centerMassX + "," + centerMassY);
+        System.out.println(centerMassX + "," + centerMassY);
 
         stage--;
 //        System.out.println("Asteroid at ("+ centerMassX +"," + centerMassY + ") is at stage "+ stage);
