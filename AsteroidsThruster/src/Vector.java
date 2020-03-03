@@ -43,6 +43,12 @@ public class Vector {
         angle = Math.asin(pycom/magnitude);
     }
 
+    public void scale(double scale){
+        magnitude*=scale;
+        ycom*=scale;
+        xcom*=scale;
+    }
+
     public void addVector(double pxcom, double pycom){
         xcom+=pxcom;
         ycom+=pycom;
