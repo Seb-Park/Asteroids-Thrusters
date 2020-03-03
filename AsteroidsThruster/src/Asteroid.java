@@ -33,15 +33,14 @@ public class Asteroid {
             asteroidYPoints[x] = (int) pVectors.get(x).ycom + py;
         }
         dx = (int) (Math.random() * 5 - 2.5);
-//        if(dx!=0) {
-        dy = (int) (Math.random() * 5 - 2.5);
-//        }
-//        else{
-//            dy = (int) (Math.random() * 2 +1);
-//            if(Math.random()<.5){
-//                dy=-dy;
-//            }
-//        }//this method of generation ensures no completely static asteroids
+        if (dx != 0) {
+            dy = (int) (Math.random() * 5 - 2.5);
+        } else {
+            dy = (int) (Math.random() * 2 + 1);
+            if (Math.random() < .5) {
+                dy = -dy;
+            }
+        }//this method of generation ensures no completely static asteroids
         centerMassX = px;
         centerMassY = py;
         stage = pStage;
@@ -56,7 +55,7 @@ public class Asteroid {
 
         System.out.print("[");
         for (int i = 0; i < vectors.size(); i++) {
-            System.out.print("["+vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
+            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
 //            vectors.get(i).recalculate(vectors.get(i).angle, vectors.get(i).magnitude / 2);//divide size by two
             vectors.get(i).scale(.5);
         }
@@ -71,7 +70,7 @@ public class Asteroid {
 
         System.out.print("[");
         for (int i = 0; i < vectors.size(); i++) {
-            System.out.print("["+vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
+            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
         }
         System.out.println("]");
 
