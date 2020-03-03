@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Asteroid {
@@ -8,6 +9,8 @@ public class Asteroid {
     public ArrayList<Vector> vectors = new ArrayList<Vector>();
     public int[] asteroidXPoints;
     public int[] asteroidYPoints;
+    public Polygon collider;
+    public int stage;
 
     public Asteroid(ArrayList<Vector> pVectors) {
         vectors = (ArrayList<Vector>) (pVectors.clone());
@@ -31,9 +34,15 @@ public class Asteroid {
         }
         dx = (int)(Math.random() * 5 - 2.5);
         dy = (int)(Math.random() * 5 - 2.5);
+        stage = 3;
+        //findCenter();
 
         //add wrapping around the screen, rotation, and collisions
 
+    }
+
+    public void split(){
+        
     }
 
     public void rotate(double pAngle) {
@@ -46,7 +55,10 @@ public class Asteroid {
         for (int i = 0; i < vectors.size(); i++) {
             asteroidXPoints[i] += dx;
             asteroidYPoints[i] += dy;
+            centerMassX += dx;
+            centerMassY += dy;
         }
+        collider = new Polygon(asteroidXPoints, asteroidYPoints, asteroidXPoints.length);
 
     }
 }

@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-import java.awt.Polygon;
 
 
 public class Main implements Runnable, KeyListener {
@@ -42,10 +41,10 @@ public class Main implements Runnable, KeyListener {
         for (int y = 0; y < asteroidCount; y++) {
             for (int x = 0; x < rCount; x++) {
                 rMagnitude = Math.floor(Math.random() * (1 + 20 - 1)) + 20;
-                rAngle += (int)(360/(double)rCount);//We do 360/rcount so that we get even angles throughout the asteroid (rcount of them)
+                rAngle += (int) (360 / (double) rCount);//We do 360/rcount so that we get even angles throughout the asteroid (rcount of them)
                 vectorInput.add(new Vector(rAngle, rMagnitude));
             }
-            asteroids.add(new Asteroid(vectorInput, (int)(Math.random()*1000), (int)(Math.random()*700)));
+            asteroids.add(new Asteroid(vectorInput, (int) (Math.random() * 1000), (int) (Math.random() * 700)));
             vectorInput.clear();
         }
     }
@@ -59,6 +58,7 @@ public class Main implements Runnable, KeyListener {
         while (true) {
             moveThings();
             render();
+            checkIntersections();
             pause(20);
             if (shootCounter <= 10) {
                 shootCounter++;
@@ -66,10 +66,26 @@ public class Main implements Runnable, KeyListener {
         }
     }
 
+    public void checkIntersections() {
+        for (int i = 0; i < asteroids.size(); i++) {
+            for (int j = 0; j < asteroids.size(); j++) {
+                try {
+                    if (asteroids.get(i).collider.contains(spaceship.bullets.get(j).xpos, spaceship.bullets.get(j).ypos)) {
+                        spaceship.bullets.remove(j);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+        }
+    }
 
     public void moveThings() {
         for (int x = 0; x < asteroids.size(); x++) {
             asteroids.get(x).move();
+//            if(asteroids.get(x).centerMassX<0){
+//                asteroids.get(x).
+//            }
         }
 
         if (spaceship.isThrusting) {
@@ -189,9 +205,7 @@ public class Main implements Runnable, KeyListener {
             g.setColor(Color.white);
             g.drawString(spaceship.angle + "°", 20, 20);
 //            g.drawString((double)Math.round(spaceship.velocity*10)/10 + "m/s", 20, 50);
-        }
-
-        else {
+        } else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
             g.drawImage(explosion, (int) spaceship.xpos, (int) spaceship.ypos, 75, 75, null);
