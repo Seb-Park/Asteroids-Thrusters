@@ -44,7 +44,7 @@ public class Main implements Runnable, KeyListener {
                 rAngle += (int) (360 / (double) rCount);//We do 360/rcount so that we get even angles throughout the asteroid (rcount of them)
                 vectorInput.add(new Vector(rAngle, rMagnitude));
             }
-            asteroids.add(new Asteroid(vectorInput, (int) (Math.random() * 1000), (int) (Math.random() * 700)));
+            asteroids.add(new Asteroid(vectorInput, (int) (Math.random() * 1000), (int) (Math.random() * 700), 2));
             vectorInput.clear();
         }
     }
@@ -72,7 +72,12 @@ public class Main implements Runnable, KeyListener {
                 try {
                     if (asteroids.get(i).collider.contains(spaceship.bullets.get(j).xpos, spaceship.bullets.get(j).ypos)) {
                         spaceship.bullets.remove(j);
-                        asteroids.get(i).split();
+                        if(asteroids.get(i).stage>0) {
+                            asteroids.add(asteroids.get(i).split());
+                        }
+                        else{
+                            asteroids.remove(i);
+                        }
 //                        asteroids.add(asteroids.get(i));
                     }
                 } catch (Exception e) {

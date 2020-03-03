@@ -24,7 +24,7 @@ public class Asteroid {
         dy = 1;
     }
 
-    public Asteroid(ArrayList<Vector> pVectors, int px, int py) {
+    public Asteroid(ArrayList<Vector> pVectors, int px, int py, int pStage) {
         vectors = (ArrayList<Vector>) (pVectors.clone());
         asteroidXPoints = new int[pVectors.size()];
         asteroidYPoints = new int[pVectors.size()];
@@ -33,17 +33,25 @@ public class Asteroid {
             asteroidYPoints[x] = (int) pVectors.get(x).ycom + py;
         }
         dx = (int)(Math.random() * 5 - 2.5);
-        dy = (int)(Math.random() * 5 - 2.5);
+//        if(dx!=0) {
+            dy = (int) (Math.random() * 5 - 2.5);
+//        }
+//        else{
+//            dy = (int) (Math.random() * 2 +1);
+//            if(Math.random()<.5){
+//                dy=-dy;
+//            }
+//        }//this method of generation ensures no completely static asteroids
         centerMassX = px;
         centerMassY = py;
-        stage = 3;
+        stage = pStage;
         //findCenter();
 
         //add wrapping around the screen, rotation, and collisions
 
     }
 
-    public void split(){
+    public Asteroid split(){
         for(int i = 0; i < vectors.size(); i++){
             vectors.set(i, new Vector(vectors.get(i).angle, vectors.get(i).magnitude/2));//divide size by two
         }
@@ -54,8 +62,8 @@ public class Asteroid {
             asteroidYPoints[x] = (int) (vectors.get(x).ycom + centerMassY);
         }
         stage--;
-        System.out.println("Asteroid at ("+ centerMassX +"," + centerMassY + ") is at stage "+ stage);
-//        return new Asteroid();
+//        System.out.println("Asteroid at ("+ centerMassX +"," + centerMassY + ") is at stage "+ stage);
+        return new Asteroid(vectors, (int) centerMassX, (int) centerMassY, stage);
     }
 
     public void rotate(double pAngle) {
