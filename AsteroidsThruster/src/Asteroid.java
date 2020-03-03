@@ -92,9 +92,9 @@ public class Asteroid {
         for (int i = 0; i < vectors.size(); i++) {
             asteroidXPoints[i] += dx;
             asteroidYPoints[i] += dy;
-            centerMassX += dx;
-            centerMassY += dy;
         }
+        centerMassX += dx;
+        centerMassY += dy;
 //        System.out.println(centerMassX + "," + centerMassY);
         collider = new Polygon(asteroidXPoints, asteroidYPoints, asteroidXPoints.length);
 
