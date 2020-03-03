@@ -22,25 +22,32 @@ public class Main implements Runnable, KeyListener {
     public Image explosion;
 
     public int shootCounter;
-    public int randomAsteroids;
+    public int rCount, asteroidCount;
+    public double rMagnitude, rAngle;
 
     public BufferStrategy bufferStrategy;
 
     public ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+    public ArrayList<Vector> vectorInput = new ArrayList<Vector>();
 
 
     public Main() {
         setUpGraphics();
         spaceship = new Ship(500, 350);
         shootCounter = 10;
-        randomAsteroids = (int) (Math.random() * 10);
+        asteroidCount = 1;
+        rCount = (int) Math.floor(Math.random() * (1 + 7 - 3) + 3);
         explosion = Toolkit.getDefaultToolkit().getImage("explosion.gif");
 
-        for (int x = 0; x < randomAsteroids; x++) {
-            //asteroids.add(new Asteroid());
+        for (int y = 0; y < asteroidCount; y++) {
+            for (int x = 0; x < rCount; x++) {
+                rMagnitude = Math.floor(Math.random() * (1 + 20 - 1)) + 1;
+                rAngle = Math.floor(Math.random() * (1 + 360));
+                vectorInput.add(new Vector(rAngle, rMagnitude));
+            }
+            asteroids.add(new Asteroid(vectorInput));
+            vectorInput.clear();
         }
-
-
     }
 
     public static void main(String[] args) {
@@ -61,6 +68,10 @@ public class Main implements Runnable, KeyListener {
 
 
     public void moveThings() {
+        for (int x = 0; x < asteroids.size(); x++) {
+            asteroids.get(x).move();
+        }
+
         if (spaceship.isThrusting) {
             spaceship.thrustNew();
         } else {
@@ -84,7 +95,7 @@ public class Main implements Runnable, KeyListener {
 
         for (int x = 0; x < spaceship.bullets.size(); x++) {
             spaceship.bullets.get(x).move();
-            if(spaceship.bullets.get(x).xpos>1000||spaceship.bullets.get(x).xpos<0||spaceship.bullets.get(x).ypos<0||spaceship.bullets.get(x).ypos>700){
+            if (spaceship.bullets.get(x).xpos > 1000 || spaceship.bullets.get(x).xpos < 0 || spaceship.bullets.get(x).ypos < 0 || spaceship.bullets.get(x).ypos > 700) {
                 spaceship.bullets.remove(x);
             }
         }
@@ -164,14 +175,23 @@ public class Main implements Runnable, KeyListener {
                 g.setColor(Color.orange);
                 g.fillPolygon(spaceship.engineXPoints, spaceship.engineYPoints, 4);
             }
+
+            for (int x = 0; x < asteroids.size(); x++) {
+                g.setColor(Color.white);
+                g.drawPolygon(asteroids.get(x).asteroidXPoints, asteroids.get(x).asteroidYPoints, asteroids.get(x).asteroidXPoints.length);
+            }
+
             for (int x = 0; x < spaceship.bullets.size(); x++) {
                 g.setColor(Color.white);
                 g.fillOval(spaceship.bullets.get(x).xpos, spaceship.bullets.get(x).ypos, 5, 5);
             }
+
             g.setColor(Color.white);
             g.drawString(spaceship.angle + "°", 20, 20);
 //            g.drawString((double)Math.round(spaceship.velocity*10)/10 + "m/s", 20, 50);
-        } else {
+        }
+
+        else {
             g.setColor(Color.white);
             g.drawString("GAME OVER", 450, 600);
             g.drawImage(explosion, (int) spaceship.xpos, (int) spaceship.ypos, 75, 75, null);

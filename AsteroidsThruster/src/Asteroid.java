@@ -5,20 +5,28 @@ public class Asteroid {
     public double dx, dy;
     public double centerMass;
     public ArrayList<Vector> vectors = new ArrayList<Vector>();
-    public ArrayList<Integer> asteroidXPoints = new ArrayList<Integer>();
-    public ArrayList<Integer> asteroidYPoints = new ArrayList<Integer>();
+    public int[] asteroidXPoints;
+    public int[] asteroidYPoints;
 
     public Asteroid(ArrayList<Vector> pVectors) {
-//        asteroidXPoints = calculate based on the inputed vectors -- for each one use the recalculate method
-//        asteroidYPoints =
         vectors = pVectors;
-        dx = 3;
-        dy = 3;
+        asteroidXPoints = new int[pVectors.size()];
+        asteroidYPoints = new int[pVectors.size()];
+        for (int x = 0; x < pVectors.size(); x++) {
+            asteroidXPoints[x] = (int) pVectors.get(x).xcom;
+            asteroidYPoints[x] = (int) pVectors.get(x).ycom;
+        }
+        dx = 5;
+        dy = 5;
 
     }
 
-    public void rotate(){
+    public void move() {
 
+        for (int x = 0; x < vectors.size(); x++) {
+            asteroidXPoints[x] += dx;
+            asteroidYPoints[x] += dy;
+        }
     }
 
 }
