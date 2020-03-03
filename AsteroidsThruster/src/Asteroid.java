@@ -32,6 +32,7 @@ public class Asteroid {
         dx = (int)(Math.random() * 5 - 2.5);
         dy = (int)(Math.random() * 5 - 2.5);
 
+        //add wrapping around the screen, rotation, and collisions
 
     }
 
