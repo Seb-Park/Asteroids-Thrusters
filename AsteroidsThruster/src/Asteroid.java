@@ -34,6 +34,8 @@ public class Asteroid {
         }
         dx = (int)(Math.random() * 5 - 2.5);
         dy = (int)(Math.random() * 5 - 2.5);
+        centerMassX = px;
+        centerMassY = py;
         stage = 3;
         //findCenter();
 
@@ -42,7 +44,18 @@ public class Asteroid {
     }
 
     public void split(){
-        
+        for(int i = 0; i < vectors.size(); i++){
+            vectors.set(i, new Vector(vectors.get(i).angle, vectors.get(i).magnitude/2));//divide size by two
+        }
+        asteroidXPoints = new int[vectors.size()];
+        asteroidYPoints = new int[vectors.size()];
+        for (int x = 0; x < vectors.size(); x++) {
+            asteroidXPoints[x] = (int) (vectors.get(x).xcom + centerMassX);
+            asteroidYPoints[x] = (int) (vectors.get(x).ycom + centerMassY);
+        }
+        stage--;
+        System.out.println("Asteroid at ("+ centerMassX +"," + centerMassY + ") is at stage "+ stage);
+//        return new Asteroid();
     }
 
     public void rotate(double pAngle) {
@@ -58,6 +71,7 @@ public class Asteroid {
             centerMassX += dx;
             centerMassY += dy;
         }
+//        System.out.println(centerMassX + "," + centerMassY);
         collider = new Polygon(asteroidXPoints, asteroidYPoints, asteroidXPoints.length);
 
     }

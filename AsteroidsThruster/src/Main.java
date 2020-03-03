@@ -72,6 +72,8 @@ public class Main implements Runnable, KeyListener {
                 try {
                     if (asteroids.get(i).collider.contains(spaceship.bullets.get(j).xpos, spaceship.bullets.get(j).ypos)) {
                         spaceship.bullets.remove(j);
+                        asteroids.get(i).split();
+//                        asteroids.add(asteroids.get(i));
                     }
                 } catch (Exception e) {
 
