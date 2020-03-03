@@ -118,7 +118,7 @@ public class Main implements Runnable, KeyListener {
 
         for (int x = 0; x < spaceship.bullets.size(); x++) {
             spaceship.bullets.get(x).move();
-            if (spaceship.bullets.get(x).xpos > 1000 || spaceship.bullets.get(x).xpos < 0 || spaceship.bullets.get(x).ypos < 0 || spaceship.bullets.get(x).ypos > 700) {
+            if (spaceship.bullets.get(x).xpos > frame.getWidth() || spaceship.bullets.get(x).xpos < 0 || spaceship.bullets.get(x).ypos < 0 || spaceship.bullets.get(x).ypos > frame.getHeight()) {
                 spaceship.bullets.remove(x);
             }
         }
