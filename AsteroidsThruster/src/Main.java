@@ -5,6 +5,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.awt.Polygon;
 
 
 public class Main implements Runnable, KeyListener {
@@ -20,15 +22,25 @@ public class Main implements Runnable, KeyListener {
     public Image explosion;
 
     public int shootCounter;
+    public int randomAsteroids;
 
     public BufferStrategy bufferStrategy;
+
+    public ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 
 
     public Main() {
         setUpGraphics();
         spaceship = new Ship(500, 350);
         shootCounter = 10;
+        randomAsteroids = (int) (Math.random() * 10);
         explosion = Toolkit.getDefaultToolkit().getImage("explosion.gif");
+
+        for (int x = 0; x < randomAsteroids; x++) {
+            asteroids.add(new Asteroid());
+        }
+
+
     }
 
     public static void main(String[] args) {
