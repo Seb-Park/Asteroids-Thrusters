@@ -37,7 +37,7 @@ public class Main implements Runnable, KeyListener {
         explosion = Toolkit.getDefaultToolkit().getImage("explosion.gif");
 
         for (int x = 0; x < randomAsteroids; x++) {
-            asteroids.add(new Asteroid());
+            //asteroids.add(new Asteroid());
         }
 
 
