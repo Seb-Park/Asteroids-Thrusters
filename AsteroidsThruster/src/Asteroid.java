@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Asteroid {
 
     public double dx, dy;
-    public double centerMass;
+    public double centerMassX;
+    public double centerMassY;
     public ArrayList<Vector> vectors = new ArrayList<Vector>();
     public int[] asteroidXPoints;
     public int[] asteroidYPoints;
@@ -19,9 +20,10 @@ public class Asteroid {
         dx = 5;
         dy = 5;
 
+
     }
 
-    public void move() {
+    public void rotate(double pAngle) {
 
         for (int x = 0; x < vectors.size(); x++) {
             asteroidXPoints[x] += dx;
@@ -29,6 +31,13 @@ public class Asteroid {
         }
     }
 
+    public void move() {
+        centerMassX= centerMassX+dx;
+        centerMassY = centerMassY+dy;
+
+
+
+    }
 }
 
 
