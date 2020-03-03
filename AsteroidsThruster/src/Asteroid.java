@@ -53,13 +53,13 @@ public class Asteroid {
     public Asteroid split() {
         System.out.println(centerMassX + "," + centerMassY);
 
-        System.out.print("[");
+//        System.out.print("[");
         for (int i = 0; i < vectors.size(); i++) {
-            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
+//            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
 //            vectors.get(i).recalculate(vectors.get(i).angle, vectors.get(i).magnitude / 2);//divide size by two
             vectors.get(i).scale(.5);
         }
-        System.out.println("]");
+//        System.out.println("]");
 
         asteroidXPoints = new int[vectors.size()];
         asteroidYPoints = new int[vectors.size()];
@@ -68,13 +68,13 @@ public class Asteroid {
             asteroidYPoints[x] = (int) (vectors.get(x).ycom + centerMassY);
         }
 
-        System.out.print("[");
+//        System.out.print("[");
         for (int i = 0; i < vectors.size(); i++) {
-            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
+//            System.out.print("[" + vectors.get(i).angle + "," + vectors.get(i).magnitude + "],");
         }
-        System.out.println("]");
+//        System.out.println("]");
 
-        System.out.println(centerMassX + "," + centerMassY);
+//        System.out.println(centerMassX + "," + centerMassY);
 
         stage--;
 //        System.out.println("Asteroid at ("+ centerMassX +"," + centerMassY + ") is at stage "+ stage);
