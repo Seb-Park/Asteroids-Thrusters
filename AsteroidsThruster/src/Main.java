@@ -35,17 +35,17 @@ public class Main implements Runnable, KeyListener {
         setUpGraphics();
         spaceship = new Ship(500, 350);
         shootCounter = 10;
-        asteroidCount = 1;
-        rCount = (int) Math.floor(Math.random() * (1 + 7 - 3) + 3);
+        asteroidCount = 5;
+        rCount = (int) (Math.floor(Math.random() * (1 + 7 - 3)) + 10);
         explosion = Toolkit.getDefaultToolkit().getImage("explosion.gif");
 
         for (int y = 0; y < asteroidCount; y++) {
             for (int x = 0; x < rCount; x++) {
-                rMagnitude = Math.floor(Math.random() * (1 + 20 - 1)) + 1;
-                rAngle = Math.floor(Math.random() * (1 + 360));
+                rMagnitude = Math.floor(Math.random() * (1 + 20 - 1)) + 20;
+                rAngle += (int)(360/(double)rCount);//We do 360/rcount so that we get even angles throughout the asteroid (rcount of them)
                 vectorInput.add(new Vector(rAngle, rMagnitude));
             }
-            asteroids.add(new Asteroid(vectorInput));
+            asteroids.add(new Asteroid(vectorInput, (int)(Math.random()*1000), (int)(Math.random()*700)));
             vectorInput.clear();
         }
     }
