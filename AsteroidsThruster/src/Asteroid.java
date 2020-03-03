@@ -33,7 +33,7 @@ public class Asteroid {
             asteroidYPoints[x] = (int) pVectors.get(x).ycom + py;
         }
         dx = (int) (Math.random() * 5 - 2.5);
-        if (dx != 0) {
+        if (Math.abs(dx) > 0.2) {
             dy = (int) (Math.random() * 5 - 2.5);
         } else {
             dy = (int) (Math.random() * 2 + 1);
