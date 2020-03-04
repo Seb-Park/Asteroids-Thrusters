@@ -89,9 +89,6 @@ public class Main implements Runnable, KeyListener {
     public void moveThings() {
         for (int x = 0; x < asteroids.size(); x++) {
             asteroids.get(x).move();
-//            if(asteroids.get(x).centerMassX<0){
-//                asteroids.get(x).
-//            }
 
             for (int y = 0; y < asteroids.size(); y++) {
                 if (asteroids.get(x).centerMassX > frame.getWidth()) {
@@ -121,6 +118,15 @@ public class Main implements Runnable, KeyListener {
                         asteroids.get(x).asteroidXPoints[i] = (int) asteroids.get(x).vectors.get(i).xcom + (int) asteroids.get(x).centerMassX;
                         asteroids.get(x).asteroidYPoints[i] = (int) asteroids.get(x).vectors.get(i).ycom + (int) asteroids.get(x).centerMassY;
                     }
+                }
+            }
+        }
+
+        spaceship.shipPoly = new Polygon(spaceship.shipXPoints, spaceship.shipYPoints, 4);
+        for (int x = 0; x < asteroids.size(); x++) {
+            for (int y = 0; y < asteroids.size(); y++) {
+                if (spaceship.shipPoly.contains(asteroids.get(x).asteroidXPoints[y], asteroids.get(x).asteroidYPoints[y])){
+                    spaceship.isAlive = false;
                 }
             }
         }

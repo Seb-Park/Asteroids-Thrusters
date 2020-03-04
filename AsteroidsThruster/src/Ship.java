@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +18,7 @@ public class Ship {
     public double xthrust;
     public boolean isThrusting, isRight, isLeft, isHyperspace, isShooting, isAlive;
     public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    public Polygon shipPoly;
 
     public int[] shipXPoints, shipYPoints;
 
