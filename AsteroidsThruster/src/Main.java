@@ -72,10 +72,9 @@ public class Main implements Runnable, KeyListener {
                 try {
                     if (asteroids.get(i).collider.contains(spaceship.bullets.get(j).xpos, spaceship.bullets.get(j).ypos)) {
                         spaceship.bullets.remove(j);
-                        if(asteroids.get(i).stage>0) {
+                        if (asteroids.get(i).stage > 0) {
                             asteroids.add(asteroids.get(i).split());
-                        }
-                        else{
+                        } else {
                             asteroids.remove(i);
                         }
 //                        asteroids.add(asteroids.get(i));
@@ -93,6 +92,37 @@ public class Main implements Runnable, KeyListener {
 //            if(asteroids.get(x).centerMassX<0){
 //                asteroids.get(x).
 //            }
+
+            for (int y = 0; y < asteroids.size(); y++) {
+                if (asteroids.get(x).centerMassX > frame.getWidth()) {
+                    asteroids.get(x).centerMassX = 0;
+                    for (int i = 0; i < asteroids.get(x).asteroidXPoints.length; i++) {
+                        asteroids.get(x).asteroidXPoints[i] = (int) asteroids.get(x).vectors.get(i).xcom + (int) asteroids.get(x).centerMassX;
+                        asteroids.get(x).asteroidYPoints[i] = (int) asteroids.get(x).vectors.get(i).ycom + (int) asteroids.get(x).centerMassY;
+                    }
+                }
+                if (asteroids.get(x).centerMassX < 0) {
+                    asteroids.get(x).centerMassX = frame.getWidth();
+                    for (int i = 0; i < asteroids.get(x).asteroidXPoints.length; i++) {
+                        asteroids.get(x).asteroidXPoints[i] = (int) asteroids.get(x).vectors.get(i).xcom + (int) asteroids.get(x).centerMassX;
+                        asteroids.get(x).asteroidYPoints[i] = (int) asteroids.get(x).vectors.get(i).ycom + (int) asteroids.get(x).centerMassY;
+                    }
+                }
+                if (asteroids.get(x).centerMassY > frame.getHeight()) {
+                    asteroids.get(x).centerMassY = 0;
+                    for (int i = 0; i < asteroids.get(x).asteroidXPoints.length; i++) {
+                        asteroids.get(x).asteroidXPoints[i] = (int) asteroids.get(x).vectors.get(i).xcom + (int) asteroids.get(x).centerMassX;
+                        asteroids.get(x).asteroidYPoints[i] = (int) asteroids.get(x).vectors.get(i).ycom + (int) asteroids.get(x).centerMassY;
+                    }
+                }
+                if (asteroids.get(x).centerMassY < 0) {
+                    asteroids.get(x).centerMassY = frame.getHeight();
+                    for (int i = 0; i < asteroids.get(x).asteroidXPoints.length; i++) {
+                        asteroids.get(x).asteroidXPoints[i] = (int) asteroids.get(x).vectors.get(i).xcom + (int) asteroids.get(x).centerMassX;
+                        asteroids.get(x).asteroidYPoints[i] = (int) asteroids.get(x).vectors.get(i).ycom + (int) asteroids.get(x).centerMassY;
+                    }
+                }
+            }
         }
 
         if (spaceship.isThrusting) {
@@ -268,3 +298,5 @@ public class Main implements Runnable, KeyListener {
         }
     }
 }
+
+//bunny asteroid
