@@ -47,12 +47,14 @@ public class Ship {
     }
 
     public void reorient(double pAngle) {
-        angle += pAngle;
-        if (angle < 0) {
-            angle += 360;
-        }
-        if (angle > 360) {
-            angle = Math.abs(360 - angle);
+        if(isAlive) {
+            angle += pAngle;
+            if (angle < 0) {
+                angle += 360;
+            }
+            if (angle > 360) {
+                angle = Math.abs(360 - angle);
+            }
         }
 //        System.out.println(angle);
     }
@@ -131,13 +133,15 @@ public class Ship {
     }
 
     public void hyperspace() {
-        xpos = (int) (Math.random() * 1000);
-        ypos = (int) (Math.random() * 700);
-        isHyperspace = false;
-        int random = (int) (Math.random() * 10);
-        if (random == 5) {
-            isAlive = false;
+        if(isAlive) {
+            xpos = (int) (Math.random() * 1000);
+            ypos = (int) (Math.random() * 700);
+            isHyperspace = false;
+            int random = (int) (Math.random() * 10);
+            if (random == 5) {
+                isAlive = false;
 
+            }
         }
     }
 

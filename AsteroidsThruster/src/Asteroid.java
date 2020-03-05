@@ -46,7 +46,14 @@ public class Asteroid {
         stage = pStage;
         //findCenter();
 
-        //add wrapping around the screen, rotation, and collisions
+    }
+
+    public void rotate(){
+        for (int x = 0; x < vectors.size(); x++) {
+            vectors.get(x).recalculate(vectors.get(x).angle + 1, vectors.get(x).magnitude);
+            asteroidXPoints[x] = (int) vectors.get(x).xcom + (int) centerMassX;
+            asteroidYPoints[x] = (int) vectors.get(x).ycom + (int) centerMassY;
+        }
 
     }
 

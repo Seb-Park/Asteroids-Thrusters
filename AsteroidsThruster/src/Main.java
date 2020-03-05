@@ -89,6 +89,7 @@ public class Main implements Runnable, KeyListener {
     public void moveThings() {
         for (int x = 0; x < asteroids.size(); x++) {
             asteroids.get(x).move();
+            asteroids.get(x).rotate();
 
             for (int y = 0; y < asteroids.size(); y++) {
                 if (asteroids.get(x).centerMassX > frame.getWidth()) {
@@ -250,8 +251,12 @@ public class Main implements Runnable, KeyListener {
 //            g.drawString((double)Math.round(spaceship.velocity*10)/10 + "m/s", 20, 50);
         } else {
             g.setColor(Color.white);
-            g.drawString("GAME OVER", 450, 600);
-            g.drawImage(explosion, (int) spaceship.xpos, (int) spaceship.ypos, 75, 75, null);
+            g.drawString("GAME OVER", 475, 600);
+            g.setColor(Color.red);
+            spaceship.isAlive = false;
+            spaceship.xthrust = 0;
+            spaceship.ythrust = 0;
+            g.drawPolygon(spaceship.shipXPoints, spaceship.shipYPoints, 4);
         }
 
         g.dispose();
