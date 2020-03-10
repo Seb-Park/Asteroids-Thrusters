@@ -57,6 +57,11 @@ public class Asteroid {
 
     }
 
+    public Asteroid slice(double bulletXpos, double bulletYpos, double bulletAngle){
+        Vector contactPoint = new Vector(bulletXpos - centerMassX, bulletYpos - centerMassX, true);
+        contactPoint.angle
+    }
+
     public Asteroid split() {
         System.out.println(centerMassX + "," + centerMassY);
 

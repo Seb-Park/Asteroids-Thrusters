@@ -126,11 +126,17 @@ public class Main implements Runnable, KeyListener {
         spaceship.shipPoly = new Polygon(spaceship.shipXPoints, spaceship.shipYPoints, 4);
         for (int x = 0; x < asteroids.size(); x++) {
             for (int y = 0; y < asteroids.size(); y++) {
-                if (spaceship.shipPoly.contains(asteroids.get(x).asteroidXPoints[y], asteroids.get(x).asteroidYPoints[y])){
-                    spaceship.isAlive = false;
+                try {
+                    if (spaceship.shipPoly.contains(asteroids.get(x).asteroidXPoints[y], asteroids.get(x).asteroidYPoints[y])) {
+                        spaceship.isAlive = false;
+                    }
+                } catch (Exception e) {
+                    System.out.println("checked for a null asteroid");
                 }
             }
         }
+
+
 
         if (spaceship.isThrusting) {
             spaceship.thrustNew();
